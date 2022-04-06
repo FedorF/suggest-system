@@ -26,8 +26,8 @@ class GaussianKernel(torch.nn.Module):
 
 class KNRM(torch.nn.Module):
     def __init__(self,
-                 embedding_matrix: np.ndarray,
-                 freeze_embeddings: bool,
+                 embedding_matrix: torch.FloatTensor,
+                 mlp_state: Dict,
                  kernel_num: int = 21,
                  sigma: float = 0.1,
                  exact_sigma: float = 0.001,
@@ -35,8 +35,8 @@ class KNRM(torch.nn.Module):
                  ):
         super().__init__()
         self.embeddings = torch.nn.Embedding.from_pretrained(
-            torch.FloatTensor(embedding_matrix),
-            freeze=freeze_embeddings,
+            embedding_matrix,
+            freeze=True,
             padding_idx=0,
         )
 
@@ -48,7 +48,7 @@ class KNRM(torch.nn.Module):
         self.kernels = self._get_kernels_layers()
 
         self.mlp = self._get_mlp()
-
+        self.mlp.load_state_dict(mlp_state)
         self.out_activation = torch.nn.Sigmoid()
 
     def _kernal_mus(self, n_kernels):
