@@ -39,6 +39,7 @@ class KNRM(torch.nn.Module):
             freeze=True,
             padding_idx=0,
         )
+        self.embed_weights = self.model.embeddings.state_dict()['weight']
 
         self.kernel_num = kernel_num
         self.sigma = sigma

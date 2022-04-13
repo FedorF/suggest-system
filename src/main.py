@@ -7,7 +7,6 @@ from src.utils import QueryHandler
 cfg = DevConfig()
 
 app = Flask(__name__)
-handler = QueryHandler()
 
 
 @app.route('/ping', methods=['POST'])
@@ -23,7 +22,7 @@ def query():
         return jsonify(status='FAISS is not initialized!')
 
     queries = json.loads(request.json)['queries']  # (Dict[str, List[str]])
-    lang_check, suggestions = handler.get_suggestion(queries)
+    lang_check, suggestions = handler.suggest_candidates(queries)
 
     return jsonify(lang_check=lang_check, suggestions=suggestions)
 
@@ -38,4 +37,5 @@ def update_index():
 
 
 if __name__ == '__main__':
+    handler = QueryHandler(cfg.EMB_PATH_KNRM, cfg.MLP_PATH, cfg.VOCAB_PATH)
     app.run(debug=True)

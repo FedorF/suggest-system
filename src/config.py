@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 from pydantic import BaseSettings
 
@@ -11,7 +12,7 @@ class DevConfig(BaseSettings):
 
 
 class ProdConfig(BaseSettings):
-    EMB_PATH_KNRM: Path = Path('/')
-    VOCAB_PATH: Path = Path('/')
-    MLP_PATH: Path = Path('/')
-    EMB_PATH_GLOVE: Path = Path('/')
+    EMB_PATH_KNRM: Path = os.environ['EMB_PATH_KNRM']
+    VOCAB_PATH: Path = os.environ['VOCAB_PATH']
+    MLP_PATH: Path = os.environ['MLP_PATH']
+    EMB_PATH_GLOVE: Path = os.environ['EMB_PATH_GLOVE']
