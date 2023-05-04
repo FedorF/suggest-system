@@ -25,3 +25,9 @@ RUN python -m pip install langdetect==1.0.8
 COPY additional_data/ /additional_data/
 WORKDIR /workspace
 RUN chmod -R a+w /workspace
+
+ENV EMB_PATH_KNRM = './binary/embed.bin'
+ENV VOCAB_PATH = './binary/vocab.json'
+ENV MLP_PATH = './binary/knrm_mlp.bin'
+ENV EMB_PATH_GLOVE = './binary/glove.6B.50d.txt'
+ENV SERVICE_URL = 'http://127.0.0.1:11000/'

@@ -11,5 +11,5 @@ torchvision
 scikit-learn==0.23.2
 catboost
 scrapy==2.4.1
-faiss-cpu
+faiss
 langdetect
