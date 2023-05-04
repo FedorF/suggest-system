@@ -158,11 +158,7 @@ class QueryHandler:
         self.index.add_with_ids(vectors, np.array(list(map(int, self.documents))))
         self._index_size = self.index.ntotal
 
-    def suggest_candidates(
-            self,
-            queries: List[str]
-    ) -> Tuple[List[bool], List[Optional[List[Tuple[str, str]]]]]:
-
+    def suggest_candidates(self, queries: List[str]) -> Tuple[List[bool], List[Optional[List[Tuple[str, str]]]]]:
         lang_check, suggestions = [], []
         for query in queries:
             eng_lang = is_english_lang(query)
